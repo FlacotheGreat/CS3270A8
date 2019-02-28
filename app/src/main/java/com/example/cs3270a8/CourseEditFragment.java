@@ -73,15 +73,17 @@ public class CourseEditFragment extends Fragment {
                                 .coursesDAO()
                                 .insertCourse(courses);
 
+/*
                         List<Courses> coursesList = AppDatabase.getInstance(getContext())
                                                         .coursesDAO()
                                                         .getCourses();
+*/
 
                         Courses courseDetail = AppDatabase.getInstance(getContext())
                                                 .coursesDAO()
                                                 .getCourseDetail(courses.getCourse_code());
 
-                        Log.d("Courses", coursesList.toString() + "\n");
+                       // Log.d("Courses", coursesList.toString() + "\n");
 
                         Log.d("Courses", "Retrieving course details " + courseDetail.toString());
                     }

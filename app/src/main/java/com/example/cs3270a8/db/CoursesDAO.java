@@ -1,5 +1,6 @@
 package com.example.cs3270a8.db;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -23,7 +24,7 @@ public interface CoursesDAO {
     void deleteCourse(Courses courses);
 
     @Query("Select * from Courses")
-    List<Courses> getCourses();
+    LiveData<List<Courses>> getCourses();
 
     @Query("Select * from Courses Where course_code LIKE :course_code")
     Courses getCourseDetail(String course_code);
