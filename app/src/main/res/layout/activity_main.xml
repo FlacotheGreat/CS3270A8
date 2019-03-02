@@ -36,7 +36,7 @@
         android:id="@+id/fragment"
         android:name="com.example.cs3270a8.CourseListFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="432dp"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="left|center"
         tools:layout="@layout/fragment_course_list" />

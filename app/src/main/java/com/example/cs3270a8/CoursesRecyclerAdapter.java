@@ -1,6 +1,8 @@
 package com.example.cs3270a8;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import java.util.List;
 public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecyclerAdapter.CoursesViewHolder> {
 
     private final List<Courses> coursesList;
+
 
     public CoursesRecyclerAdapter(@NonNull List<Courses> courses){
 
@@ -53,7 +56,15 @@ public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecycler
             coursesViewHolder.itemRoot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("TestClickCourse", "Course name was clickeg");
+                Log.d("TestClickCourse", "Course name was clicked");
+
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(android.R.id.content, new CourseViewFragment())
+                            .addToBackStack(null)
+                            .commit();
+
                 }
             });
         }

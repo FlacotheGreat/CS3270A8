@@ -35,14 +35,17 @@ public class CourseListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return root = inflater.inflate(R.layout.fragment_course_list, container, false);
+        root = inflater.inflate(R.layout.fragment_course_list, container, false);
+        recyclerView = (RecyclerView) root.findViewById(R.id.recyclerCoursesList);
+
+        return root;
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        recyclerView = root.findViewById(R.id.recyclerCoursesList);
+
         adapter = new CoursesRecyclerAdapter(new ArrayList<Courses>());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
