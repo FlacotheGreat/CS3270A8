@@ -32,7 +32,6 @@ public class CourseViewFragment extends Fragment {
 
         Toolbar toolbar = root.findViewById(R.id.toolbar);
 
-
         return root;
     }
 

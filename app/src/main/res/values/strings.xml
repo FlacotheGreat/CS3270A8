@@ -1,12 +1,13 @@
 <resources>
-    <string name="app_name">CS3270A8</string>
+    <string name="app_name">CS3270A8 Anthony Perez</string>
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="id">ID:</string>
     <string name="name_required">Name (Required):</string>
     <string name="course_code">Course Code:</string>
     <string name="course_start_date">Course Start Date:</string>
     <string name="course_end_date">Course End Date:</string>
+    <string name="course_name">Course Name:</string>
+    <string name="start_date">Start Date:</string>
+    <string name="end_date">End Date:</string>
+    <string name="id">ID:</string>
 </resources>
