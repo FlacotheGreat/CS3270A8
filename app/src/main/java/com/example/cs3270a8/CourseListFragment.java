@@ -26,7 +26,7 @@ public class CourseListFragment extends Fragment {
     private View root;
     private RecyclerView recyclerView;
     private CoursesRecyclerAdapter adapter;
-
+    private CoursesRecyclerAdapter.OnCourseClicked courseClicked;
     public CourseListFragment() {
         // Required empty public constructor
     }
@@ -46,7 +46,7 @@ public class CourseListFragment extends Fragment {
         super.onResume();
 
 
-        adapter = new CoursesRecyclerAdapter(new ArrayList<Courses>());
+        adapter = new CoursesRecyclerAdapter(new ArrayList<Courses>(), courseClicked);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerView.setAdapter(adapter);
