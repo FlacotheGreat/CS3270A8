@@ -68,13 +68,13 @@ public class CourseListFragment extends Fragment implements CoursesRecyclerAdapt
     }
 
     @Override
-    public void getCourseClicked(Courses courses) {
+    public Fragment getCourseClicked(Courses courses) {
 
             Log.d("TestCourseClicked","Made it to main CourseListFragment");
             CourseViewFragment cvf = new CourseViewFragment();
-
             course = courses;
             cvf.clickedCourse(courses);
 
+            return cvf;
     }
 }

@@ -16,6 +16,8 @@ import com.example.cs3270a8.db.entities.Courses;
 
 public class MainActivity extends AppCompatActivity {
 
+    FragmentManager fm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,16 +25,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+        fm = getSupportFragmentManager();
+
+        fm.beginTransaction()
+                .replace(R.id.include, new CourseListFragment())
+                .addToBackStack(null)
+                .commit();
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Log.d("TestFAB","onClick works");
-                FragmentManager fm = getSupportFragmentManager();
                 NewCourseDialogFragment newCourseDialogFragment = new NewCourseDialogFragment();
                 fm.beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .add(android.R.id.content, newCourseDialogFragment)
+                        .replace(android.R.id.content, newCourseDialogFragment)
                         .addToBackStack(null)
                         .commit();
             }

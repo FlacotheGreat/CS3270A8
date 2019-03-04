@@ -1,6 +1,7 @@
 package com.example.cs3270a8;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,7 +20,7 @@ public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecycler
     private OnCourseClicked onCourseClicked;
 
     interface OnCourseClicked{
-        void getCourseClicked(Courses courses);
+        Fragment getCourseClicked(Courses courses);
     }
 
     public CoursesRecyclerAdapter(@NonNull List<Courses> courses, OnCourseClicked onCourseClicked){
@@ -95,14 +96,16 @@ public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecycler
         public void onClick(View view) {
             Log.d("TestCourseClicked", "Dear baby jesus print right result" + courses.toString());
 
+            Fragment courseViewFragment = onCourseClicked.getCourseClicked(courses);
+
+
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
             activity.getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(android.R.id.content, new CourseViewFragment())
+                    .replace(R.id.include, courseViewFragment)
                     .addToBackStack(null)
                     .commit();
 
-            onCourseClicked.getCourseClicked(courses);
         }
     }
 

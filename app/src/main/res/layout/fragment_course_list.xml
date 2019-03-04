@@ -8,5 +8,4 @@
     tools:context=".CourseListFragment"
     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
     android:id="@+id/recyclerCoursesList">
-
 </android.support.v7.widget.RecyclerView>

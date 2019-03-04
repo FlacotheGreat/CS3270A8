@@ -1,6 +1,7 @@
 package com.example.cs3270a8;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.example.cs3270a8.db.AppDatabase;
 import com.example.cs3270a8.db.entities.Courses;
 
 
@@ -25,6 +27,7 @@ public class CourseViewFragment extends Fragment {
     private View root;
     private Courses course;
     private EditText editId, editCName, editCCode, editSDate,editEDate;
+    final static int aName = 1;
     public CourseViewFragment() {
         // Required empty public constructor
     }
@@ -72,7 +75,10 @@ public class CourseViewFragment extends Fragment {
                 DeleteConfirmationDialog deleteConfirmationDialog = new DeleteConfirmationDialog();
                 AppCompatActivity activity = (AppCompatActivity) getContext();
 
+                deleteConfirmationDialog.setTargetFragment(this,aName);
                 deleteConfirmationDialog.show(activity.getSupportFragmentManager(),"DeleteDialog");
+
+
 
                 return true;
             default:
@@ -83,14 +89,25 @@ public class CourseViewFragment extends Fragment {
     public void clickedCourse(Courses courses)
     {
 
-        if(this.course != null){
+        if(courses != null){
             Log.d("TestCourseClicked", "CourseView has:" + courses.toString());
             this.course = courses;
-            editId.setText(course.id);
-            editCName.setText(course.name);
-            editCCode.setText(course.course_code);
-            editSDate.setText(course.start_at);
-            editEDate.setText(course.end_at);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == aName && resultCode == 0){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    AppDatabase.getInstance(getContext())
+                            .coursesDAO()
+                            .deleteCourse(course);
+
+                }
+            }).start();
         }
     }
 

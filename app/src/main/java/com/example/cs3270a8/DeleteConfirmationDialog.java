@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cs3270a8.db.AppDatabase;
+import com.example.cs3270a8.db.entities.Courses;
 
 
 /**
@@ -22,6 +23,9 @@ import com.example.cs3270a8.db.AppDatabase;
  */
 public class DeleteConfirmationDialog extends DialogFragment {
 
+
+    Courses course;
+    boolean reply = false;
 
     public DeleteConfirmationDialog() {
         // Required empty public constructor
@@ -39,10 +43,7 @@ public class DeleteConfirmationDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Log.d("TestDialog", "Yes button clicked delete course");
-
-//                        AppDatabase.getInstance(getContext())
-//                                .coursesDAO()
-//                                .deleteCourse(course);
+                       getTargetFragment().onActivityResult(CourseViewFragment.aName,0,null);
 
                     }
                 })
