@@ -1,8 +1,6 @@
 package com.example.cs3270a8;
 
-import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -50,7 +48,7 @@ public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecycler
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CoursesViewHolder coursesViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final CoursesViewHolder coursesViewHolder, int i) {
 
         final Courses courses = coursesList.get(i);
 
@@ -59,19 +57,11 @@ public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecycler
             coursesViewHolder.coursesName.setText(courses.getName());
 
             coursesViewHolder.itemRoot.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
-                Log.d("TestClickCourse", "Course name was clicked");
-
-                Log.d("TestClickCourse","Which course was clicked? maybe this one:" +courses.getName());
-
-                    onCourseClicked.getCourseClicked(courses);
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    activity.getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(android.R.id.content, new CourseViewFragment())
-                            .addToBackStack(null)
-                            .commit();
+                    coursesViewHolder.courses = courses;
+                    coursesViewHolder.onClick(view);
 
                 }
             });
@@ -103,6 +93,15 @@ public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecycler
 
         @Override
         public void onClick(View view) {
+            Log.d("TestCourseClicked", "Dear baby jesus print right result" + courses.toString());
+
+            AppCompatActivity activity = (AppCompatActivity) view.getContext();
+            activity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(android.R.id.content, new CourseViewFragment())
+                    .addToBackStack(null)
+                    .commit();
+
             onCourseClicked.getCourseClicked(courses);
         }
     }

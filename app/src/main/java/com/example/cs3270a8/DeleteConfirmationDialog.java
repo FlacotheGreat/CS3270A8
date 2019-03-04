@@ -56,4 +56,6 @@ public class DeleteConfirmationDialog extends DialogFragment {
 
        return builder.create();
     }
+
+
 }

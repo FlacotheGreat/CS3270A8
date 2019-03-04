@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +22,12 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CourseListFragment extends Fragment {
+public class CourseListFragment extends Fragment implements CoursesRecyclerAdapter.OnCourseClicked{
 
     private View root;
     private RecyclerView recyclerView;
     private CoursesRecyclerAdapter adapter;
-    private CoursesRecyclerAdapter.OnCourseClicked courseClicked;
+    private Courses course;
     public CourseListFragment() {
         // Required empty public constructor
     }
@@ -46,7 +47,7 @@ public class CourseListFragment extends Fragment {
         super.onResume();
 
 
-        adapter = new CoursesRecyclerAdapter(new ArrayList<Courses>(), courseClicked);
+        adapter = new CoursesRecyclerAdapter(new ArrayList<Courses>(), this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerView.setAdapter(adapter);
@@ -63,6 +64,17 @@ public class CourseListFragment extends Fragment {
                         }
                     }
                 });
+
+    }
+
+    @Override
+    public void getCourseClicked(Courses courses) {
+
+            Log.d("TestCourseClicked","Made it to main CourseListFragment");
+            CourseViewFragment cvf = new CourseViewFragment();
+
+            course = courses;
+            cvf.clickedCourse(courses);
 
     }
 }

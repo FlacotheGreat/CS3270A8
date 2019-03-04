@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import com.example.cs3270a8.db.entities.Courses;
 
-public class MainActivity extends AppCompatActivity implements CoursesRecyclerAdapter.OnCourseClicked{
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +62,4 @@ public class MainActivity extends AppCompatActivity implements CoursesRecyclerAd
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void getCourseClicked(Courses courses) {
-
-        Log.d("TestCourseClicke","Made it to main activity");
-        CourseViewFragment cvf = new CourseViewFragment();
-
-        cvf.clickedCourse(courses);
-
-    }
 }

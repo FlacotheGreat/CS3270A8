@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.cs3270a8.db.entities.Courses;
 
@@ -23,6 +24,7 @@ public class CourseViewFragment extends Fragment {
 
     private View root;
     private Courses course;
+    private EditText editId, editCName, editCCode, editSDate,editEDate;
     public CourseViewFragment() {
         // Required empty public constructor
     }
@@ -33,8 +35,17 @@ public class CourseViewFragment extends Fragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_course_view, container, false);
 
+        editId = root.findViewById(R.id.editCourseId);
+        editCName = root.findViewById(R.id.editCName);
+        editCCode = root.findViewById(R.id.editCourse);
+        editSDate = root.findViewById(R.id.editStartDate);
+        editEDate = root.findViewById(R.id.editEndDate);
+
         Toolbar toolbar = root.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        Log.d("TestClickedCourse","When are we created?");
+
+        addCoursesToText();
 
         setHasOptionsMenu(true);
         return root;
@@ -71,7 +82,26 @@ public class CourseViewFragment extends Fragment {
 
     public void clickedCourse(Courses courses)
     {
-        Log.d("TestCourseClicked", "CourseView has:" + courses.toString());
-        this.course = courses;
+
+        if(this.course != null){
+            Log.d("TestCourseClicked", "CourseView has:" + courses.toString());
+            this.course = courses;
+            editId.setText(course.id);
+            editCName.setText(course.name);
+            editCCode.setText(course.course_code);
+            editSDate.setText(course.start_at);
+            editEDate.setText(course.end_at);
+        }
+    }
+
+    private void addCoursesToText() {
+
+        Log.d("TestCourseClicked", "AddCoursesToText called");
+        if (this.course != null){
+            Log.d("TestCourseView", "Entering in the following course to Edit text" + course.toString());
+            editId.setText(course.id);
+            editCName.setText(course.name);
+            Log.d("TestCourseClicked", "CourseView has:" + course.toString());
+        }
     }
 }
