@@ -44,6 +44,12 @@ public class CourseViewFragment extends Fragment {
         editSDate = root.findViewById(R.id.editStartDate);
         editEDate = root.findViewById(R.id.editEndDate);
 
+        editId.setEnabled(false);
+        editCName.setEnabled(false);
+        editCCode.setEnabled(false);
+        editSDate.setEnabled(false);
+        editEDate.setEnabled(false);
+
         Toolbar toolbar = root.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         Log.d("TestClickedCourse","When are we created?");
@@ -108,6 +114,8 @@ public class CourseViewFragment extends Fragment {
 
                 }
             }).start();
+
+
         }
     }
 
@@ -118,6 +126,10 @@ public class CourseViewFragment extends Fragment {
             Log.d("TestCourseView", "Entering in the following course to Edit text" + course.toString());
             editId.setText(course.id);
             editCName.setText(course.name);
+            editCCode.setText(course.course_code);
+            editSDate.setText(course.start_at);
+            editEDate.setText(course.end_at);
+
             Log.d("TestCourseClicked", "CourseView has:" + course.toString());
         }
     }

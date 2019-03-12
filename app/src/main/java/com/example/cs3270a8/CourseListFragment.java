@@ -37,7 +37,7 @@ public class CourseListFragment extends Fragment implements CoursesRecyclerAdapt
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_course_list, container, false);
-        recyclerView = (RecyclerView) root.findViewById(R.id.recyclerCoursesList);
+        recyclerView = root.findViewById(R.id.recyclerCoursesList);
 
         return root;
     }
