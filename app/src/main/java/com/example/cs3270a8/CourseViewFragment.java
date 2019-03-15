@@ -21,6 +21,8 @@ import com.example.cs3270a8.db.AppDatabase;
 import com.example.cs3270a8.db.entities.Courses;
 
 
+
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -149,4 +151,5 @@ public class CourseViewFragment extends Fragment {
             Log.d("TestCourseClicked", "CourseView has:" + course.toString());
         }
     }
+
 }

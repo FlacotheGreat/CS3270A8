@@ -3,6 +3,7 @@ package com.example.cs3270a8;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,8 +16,15 @@ import android.view.ViewGroup;
 
 import com.example.cs3270a8.db.entities.Courses;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 
 /**
@@ -41,6 +49,7 @@ public class CourseListFragment extends Fragment implements CoursesRecyclerAdapt
 
         return root;
     }
+
 
     @Override
     public void onResume() {
@@ -76,5 +85,38 @@ public class CourseListFragment extends Fragment implements CoursesRecyclerAdapt
             cvf.clickedCourse(courses);
 
             return cvf;
+    }
+
+    public class getOnlineCourses extends AsyncTask<String, Integer, String> {
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            try {
+                URL url = new URL("https://weber.instructure.com/api/v1/courses");
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("Authorization","Bearer " + Authorization.AUTH_KEY);
+
+                connection.connect();
+
+                int status = connection.getResponseCode();
+
+                switch (status){
+
+                    case 200:
+                    case 201:
+                        BufferedReader br = new BufferedReader( new InputStreamReader(connection.getInputStream()));
+                }
+
+            } catch (MalformedURLException err){
+
+            } catch (IOException err){
+
+            }
+            return null;
+        }
     }
 }
