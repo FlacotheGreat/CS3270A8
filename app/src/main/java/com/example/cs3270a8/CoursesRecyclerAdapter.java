@@ -98,7 +98,6 @@ public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecycler
 
             Fragment courseViewFragment = onCourseClicked.getCourseClicked(courses);
 
-
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
             activity.getSupportFragmentManager()
                     .beginTransaction()

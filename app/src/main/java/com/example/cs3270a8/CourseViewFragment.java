@@ -4,6 +4,7 @@ package com.example.cs3270a8;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.cs3270a8.db.AppDatabase;
@@ -27,7 +29,10 @@ public class CourseViewFragment extends Fragment {
     private View root;
     private Courses course;
     private EditText editId, editCName, editCCode, editSDate,editEDate;
+    private Button saveBtn;
     final static int aName = 1;
+    private FragmentManager fm;
+
     public CourseViewFragment() {
         // Required empty public constructor
     }
@@ -43,12 +48,16 @@ public class CourseViewFragment extends Fragment {
         editCCode = root.findViewById(R.id.editCourse);
         editSDate = root.findViewById(R.id.editStartDate);
         editEDate = root.findViewById(R.id.editEndDate);
+        saveBtn = root.findViewById(R.id.save_btn);
 
+        saveBtn.setVisibility(View.INVISIBLE);
         editId.setEnabled(false);
         editCName.setEnabled(false);
         editCCode.setEnabled(false);
         editSDate.setEnabled(false);
         editEDate.setEnabled(false);
+
+
 
         Toolbar toolbar = root.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -74,6 +83,15 @@ public class CourseViewFragment extends Fragment {
             case R.id.action_edit:
                 //Do something
                 Log.d("TestOptions", "Edit button pressed");
+
+                editId.setEnabled(true);
+                editCName.setEnabled(true);
+                editCCode.setEnabled(true);
+                editSDate.setEnabled(true);
+                editEDate.setEnabled(true);
+
+                saveBtn.setVisibility(View.VISIBLE);
+
                 return true;
             case R.id.action_delete:
                 //Bring up dialog
@@ -114,8 +132,6 @@ public class CourseViewFragment extends Fragment {
 
                 }
             }).start();
-
-
         }
     }
 
