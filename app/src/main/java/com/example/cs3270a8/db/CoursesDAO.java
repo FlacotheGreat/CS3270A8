@@ -29,5 +29,8 @@ public interface CoursesDAO {
     @Query("Select * from Courses Where course_code LIKE :course_code")
     Courses getCourseDetail(String course_code);
 
+    @Query("Delete from Courses")
+    void deleteAllCourses();
+
 
 }

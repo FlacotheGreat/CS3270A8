@@ -66,6 +66,16 @@ public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecycler
 
                 }
             });
+
+            coursesViewHolder.itemRoot.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+
+
+
+                    return false;
+                }
+            });
         }
 
     }

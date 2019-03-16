@@ -60,9 +60,6 @@ public class CourseViewFragment extends Fragment {
         editEDate.setEnabled(false);
 
 
-
-        Toolbar toolbar = root.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         Log.d("TestClickedCourse","When are we created?");
 
         addCoursesToText();
@@ -74,7 +71,7 @@ public class CourseViewFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        getActivity().getMenuInflater().inflate(R.menu.view_edit_menu,menu);
+       inflater.inflate(R.menu.view_edit_menu,menu);
     }
 
     @Override
@@ -103,7 +100,6 @@ public class CourseViewFragment extends Fragment {
 
                 deleteConfirmationDialog.setTargetFragment(this,aName);
                 deleteConfirmationDialog.show(activity.getSupportFragmentManager(),"DeleteDialog");
-
 
 
                 return true;
