@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         fm.beginTransaction()
                 .replace(R.id.include, new CourseListFragment())
-                .addToBackStack(null)
                 .commit();
 
         fab.setOnClickListener(new View.OnClickListener() {

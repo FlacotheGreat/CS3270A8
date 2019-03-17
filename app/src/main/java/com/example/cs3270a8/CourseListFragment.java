@@ -42,7 +42,6 @@ public class CourseListFragment extends Fragment implements CoursesRecyclerAdapt
     private View root;
     private RecyclerView recyclerView;
     private CoursesRecyclerAdapter adapter;
-    private Courses course;
     public CourseListFragment() {
         // Required empty public constructor
     }
@@ -108,7 +107,6 @@ public class CourseListFragment extends Fragment implements CoursesRecyclerAdapt
 
             Log.d("TestCourseClicked","Made it to main CourseListFragment");
             CourseViewFragment cvf = new CourseViewFragment();
-            course = courses;
             cvf.clickedCourse(courses);
 
             return cvf;

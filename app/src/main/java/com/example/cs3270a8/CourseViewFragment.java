@@ -33,7 +33,7 @@ public class CourseViewFragment extends Fragment {
     private EditText editId, editCName, editCCode, editSDate,editEDate;
     private Button saveBtn;
     final static int aName = 1;
-    private FragmentManager fm;
+    AppCompatActivity activity;
 
     public CourseViewFragment() {
         // Required empty public constructor
@@ -58,6 +58,38 @@ public class CourseViewFragment extends Fragment {
         editCCode.setEnabled(false);
         editSDate.setEnabled(false);
         editEDate.setEnabled(false);
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Courses courses = course;
+
+                        courses.setId(editId.getText().toString());
+                        courses.setName(editCName.getText().toString());
+                        courses.setCourse_code(editCCode.getText().toString());
+                        courses.setStart_at(editSDate.getText().toString());
+                        courses.setEnd_at(editEDate.getText().toString());
+
+                        Log.d("TestUpdateCourse", "Course changing to: " + courses.toString());
+                        if(courses != null) {
+                            AppDatabase.getInstance(getContext())
+                                    .coursesDAO()
+                                    .updateCourses(courses);
+
+                            Log.d("Test result",AppDatabase.getInstance(getContext())
+                                    .coursesDAO()
+                                    .getCourseDetail(courses.course_code).toString());
+                        }
+                    }
+                }).start();
+
+                returnToCourseList();
+            }
+        });
 
 
         Log.d("TestClickedCourse","When are we created?");
@@ -96,10 +128,12 @@ public class CourseViewFragment extends Fragment {
                 //Bring up dialog
                 Log.d("TestOptions", "Delete button pressed");
                 DeleteConfirmationDialog deleteConfirmationDialog = new DeleteConfirmationDialog();
-                AppCompatActivity activity = (AppCompatActivity) getContext();
+
+                activity = (AppCompatActivity) getContext();
 
                 deleteConfirmationDialog.setTargetFragment(this,aName);
                 deleteConfirmationDialog.show(activity.getSupportFragmentManager(),"DeleteDialog");
+
 
 
                 return true;
@@ -130,6 +164,8 @@ public class CourseViewFragment extends Fragment {
 
                 }
             }).start();
+
+            returnToCourseList();
         }
     }
 
@@ -146,6 +182,19 @@ public class CourseViewFragment extends Fragment {
 
             Log.d("TestCourseClicked", "CourseView has:" + course.toString());
         }
+    }
+
+    private void returnToCourseList(){
+
+        CourseListFragment courseListFragment = new CourseListFragment();
+
+        activity = (AppCompatActivity) getContext();
+
+        activity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.include, courseListFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 }

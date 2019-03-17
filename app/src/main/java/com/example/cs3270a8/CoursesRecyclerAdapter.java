@@ -71,6 +71,7 @@ public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecycler
                 @Override
                 public boolean onLongClick(View view) {
 
+                    Log.d("TestLongClick","LoOOOOOOOOONNNNNNNGGGGGGCLLLLLLIIIICCCCCKKKKKKK");
 
 
                     return false;
@@ -117,5 +118,7 @@ public class CoursesRecyclerAdapter extends RecyclerView.Adapter<CoursesRecycler
 
         }
     }
+
+
 
 }
