@@ -4,9 +4,7 @@ package com.example.cs3270a8;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,8 +19,6 @@ import com.example.cs3270a8.db.AppDatabase;
 import com.example.cs3270a8.db.entities.Courses;
 
 
-
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -30,7 +26,7 @@ public class CourseViewFragment extends Fragment {
 
     private View root;
     private Courses course;
-    private EditText editId, editCName, editCCode, editSDate,editEDate;
+    private EditText editId, editCName, editCCode, editSDate, editEDate;
     private Button saveBtn;
     final static int aName = 1;
     AppCompatActivity activity;
@@ -45,11 +41,11 @@ public class CourseViewFragment extends Fragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_course_view, container, false);
 
-        editId = root.findViewById(R.id.editCourseId);
+        editId = root.findViewById(R.id.editId);
         editCName = root.findViewById(R.id.editCName);
-        editCCode = root.findViewById(R.id.editCourse);
-        editSDate = root.findViewById(R.id.editStartDate);
-        editEDate = root.findViewById(R.id.editEndDate);
+        editCCode = root.findViewById(R.id.editCCode);
+        editSDate = root.findViewById(R.id.editSDate);
+        editEDate = root.findViewById(R.id.editEDate);
         saveBtn = root.findViewById(R.id.save_btn);
 
         saveBtn.setVisibility(View.INVISIBLE);
@@ -75,14 +71,10 @@ public class CourseViewFragment extends Fragment {
                         courses.setEnd_at(editEDate.getText().toString());
 
                         Log.d("TestUpdateCourse", "Course changing to: " + courses.toString());
-                        if(courses != null) {
-                            AppDatabase.getInstance(getContext())
-                                    .coursesDAO()
-                                    .updateCourses(courses);
+                        if (courses != null) {
+                            AppDatabase.getInstance(getContext()).coursesDAO().updateCourses(courses);
 
-                            Log.d("Test result",AppDatabase.getInstance(getContext())
-                                    .coursesDAO()
-                                    .getCourseDetail(courses.course_code).toString());
+                            Log.d("Test result", AppDatabase.getInstance(getContext()).coursesDAO().getCourseDetail(courses.course_code).toString());
                         }
                     }
                 }).start();
@@ -92,7 +84,7 @@ public class CourseViewFragment extends Fragment {
         });
 
 
-        Log.d("TestClickedCourse","When are we created?");
+        Log.d("TestClickedCourse", "When are we created?");
 
         addCoursesToText();
 
@@ -103,13 +95,13 @@ public class CourseViewFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-       inflater.inflate(R.menu.view_edit_menu,menu);
+        inflater.inflate(R.menu.view_edit_menu, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case R.id.action_edit:
                 //Do something
@@ -131,9 +123,8 @@ public class CourseViewFragment extends Fragment {
 
                 activity = (AppCompatActivity) getContext();
 
-                deleteConfirmationDialog.setTargetFragment(this,aName);
-                deleteConfirmationDialog.show(activity.getSupportFragmentManager(),"DeleteDialog");
-
+                deleteConfirmationDialog.setTargetFragment(this, aName);
+                deleteConfirmationDialog.show(activity.getSupportFragmentManager(), "DeleteDialog");
 
 
                 return true;
@@ -142,10 +133,9 @@ public class CourseViewFragment extends Fragment {
         }
     }
 
-    public void clickedCourse(Courses courses)
-    {
+    public void clickedCourse(Courses courses) {
 
-        if(courses != null){
+        if (courses != null) {
             Log.d("TestCourseClicked", "CourseView has:" + courses.toString());
             this.course = courses;
         }
@@ -153,14 +143,12 @@ public class CourseViewFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == aName && resultCode == 0){
+        if (requestCode == aName && resultCode == 0) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
 
-                    AppDatabase.getInstance(getContext())
-                            .coursesDAO()
-                            .deleteCourse(course);
+                    AppDatabase.getInstance(getContext()).coursesDAO().deleteCourse(course);
 
                 }
             }).start();
@@ -172,7 +160,7 @@ public class CourseViewFragment extends Fragment {
     private void addCoursesToText() {
 
         Log.d("TestCourseClicked", "AddCoursesToText called");
-        if (this.course != null){
+        if (this.course != null) {
             Log.d("TestCourseView", "Entering in the following course to Edit text" + course.toString());
             editId.setText(course.id);
             editCName.setText(course.name);
@@ -184,17 +172,13 @@ public class CourseViewFragment extends Fragment {
         }
     }
 
-    private void returnToCourseList(){
+    private void returnToCourseList() {
 
         CourseListFragment courseListFragment = new CourseListFragment();
 
         activity = (AppCompatActivity) getContext();
 
-        activity.getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.include, courseListFragment)
-                .addToBackStack(null)
-                .commit();
+        activity.getSupportFragmentManager().beginTransaction().replace(R.id.include, courseListFragment).addToBackStack(null).commit();
     }
 
 }
